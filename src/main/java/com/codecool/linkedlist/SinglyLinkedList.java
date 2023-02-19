@@ -1,17 +1,25 @@
 package com.codecool.linkedlist;
 
-public class SinglyLinkedList {
+import java.util.ArrayList;
+import java.util.LinkedList;
+
+public class SinglyLinkedList<T> {
+
+    private int size;
+    private T t;
+    private T[] newList;
+
 
     private class Link {
 
-        private int value;
+        private T value;
         private Link next;
 
-        Link(int value) {
+        Link(T value) {
             this.value = value;
         }
 
-        int getValue() {
+        T getValue() {
             return value;
         }
 
@@ -27,6 +35,7 @@ public class SinglyLinkedList {
     private Link head;
 
     public SinglyLinkedList() {
+        this.size = 0;
     }
 
 
@@ -36,7 +45,7 @@ public class SinglyLinkedList {
      *
      * @param value value to be appended
      */
-    public void add(int value) {
+    public void add(T value) {
     }
 
     /**
@@ -65,7 +74,7 @@ public class SinglyLinkedList {
      * @param index  Position of the new element
      * @param number Value to be inserted.
      */
-    public void insert(int index, int number) {
+    public void insert(int index, T number) {
     }
 
     /**

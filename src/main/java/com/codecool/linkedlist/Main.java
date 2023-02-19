@@ -4,7 +4,9 @@ public class Main {
 
     private static SinglyLinkedList list;
 
+
     public static void main(String[] args) {
+
         System.out.println("Your implementation is correct when there's no failing test after running mvn clean test.");
         if (args.length < 3) {
             terminate();
@@ -13,7 +15,8 @@ public class Main {
         int numberOfElements = Integer.valueOf(args[0]);
         String command = args[1];
 
-        list = new SinglyLinkedList();
+        list = new SinglyLinkedList<Integer>();
+
         System.out.println("After you're done try these to get a feel for computational cost.");
 
         feedList(numberOfElements);
