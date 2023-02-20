@@ -2,7 +2,7 @@ package com.codecool.linkedlist;
 
 public class Main {
 
-    private static SinglyLinkedList<Integer> list;
+    private static SinglyLinkedList<Object> list;
 
 
     public static void main(String[] args) {
@@ -15,7 +15,7 @@ public class Main {
         int numberOfElements = Integer.valueOf(args[0]);
         String command = args[1];
 
-        list = new SinglyLinkedList<Integer>();
+        list = new SinglyLinkedList<Object>();
 
         System.out.println("After you're done try these to get a feel for computational cost.");
 

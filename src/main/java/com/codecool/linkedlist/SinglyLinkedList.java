@@ -10,7 +10,7 @@ public class SinglyLinkedList<T> {
 
     private class Link {
 
-        private T value;
+        private final T value;
         private Link next;
 
         Link(T value) {
@@ -34,7 +34,7 @@ public class SinglyLinkedList<T> {
 
     public SinglyLinkedList() {
         this.size = 0;
-        this.newList = (T[]) new Object[0];
+        this.head = new Link(null);
     }
 
 
@@ -45,11 +45,20 @@ public class SinglyLinkedList<T> {
      * @param value value to be appended
      */
     public void add(T value) {
-        if (size == 0) head = new Link(value);
-
-        this.newList = Arrays.copyOf(newList, size + 1);
-        this.newList[size] = value;
-        this.size += 1;
+        if (size==0) {
+            this.head = new Link(value);
+        } else {
+            if (head.getNext()==null) {
+                head.setNext(new Link(value));
+            } else {
+                Link nextLink = head.getNext();
+                for (int i = 1; i < size-1; i++) {
+                    nextLink = nextLink.getNext();
+                }
+                nextLink.setNext(new Link(value));
+            }
+        }
+        this.size+=1;
     }
 
     /**
@@ -59,8 +68,16 @@ public class SinglyLinkedList<T> {
      * @return value of element at index
      */
     public T get(int index) {
-        if (index<size || index>0) {
-            return this.newList[index];
+        if (index<size && index>=0) {
+            if (index==0) {
+                return head.getValue();
+            } else {
+                Link nextLink = head.getNext();
+                for (int i = 1; i < index; i++) {
+                    nextLink = nextLink.getNext();
+                }
+                return nextLink.getValue();
+            }
         } else {
             throw new IndexOutOfBoundsException();
         }
@@ -73,16 +90,14 @@ public class SinglyLinkedList<T> {
      * @return Index of 'number' if it's in the list, otherwise -1;
      */
     public int indexOf(int number) {
-        int index = 0;
+        Link nextLink = head;
         for (int i = 0; i < size; i++) {
-            if (newList[i].equals(number)) {
-                index = i;
-                break;
-            } else {
-                index = -1;
+            if (nextLink.getValue().equals(number)) {
+                return i;
             }
+            nextLink = nextLink.getNext();
         }
-        return index;
+        return -1;
     }
 
     /**
@@ -92,21 +107,26 @@ public class SinglyLinkedList<T> {
      * @param number Value to be inserted.
      */
     public void insert(int index, T number) {
-        if (index >= size) {
+        if (index<0) {
+            throw new IndexOutOfBoundsException();
+        }
+        if (index==size) {
             add(number);
         } else {
-            T[] copy = (T[]) new Object[size + 1];
-            if (index == 0) {
-                copy[0] = number;
-                System.arraycopy(newList, 0, copy, 1, size);
+            if (index==0) {
+                Link temp = head;
+                this.head = new Link(number);
+                head.setNext(temp);
             } else {
-                System.arraycopy(newList, 0, copy, 0, index);
-                copy[index] = number;
-                System.arraycopy(newList, index, copy, index + 1, size - 1);
+                Link nextLink = head;
+                for (int i = 1; i < index-1; i++) {
+                    nextLink = nextLink.getNext();
+                }
+                Link temp = nextLink.getNext();
+                nextLink.setNext(new Link(number));
+                nextLink.getNext().setNext(temp);
             }
-            this.newList = copy;
-            this.head = new Link(newList[0]);
-            this.size += 1;
+            this.size+=1;
         }
     }
 
@@ -116,6 +136,8 @@ public class SinglyLinkedList<T> {
      * @return Size of list.
      */
     public int size() {
+        if(head == null) return 0;
+
         return this.size;
     }
 
