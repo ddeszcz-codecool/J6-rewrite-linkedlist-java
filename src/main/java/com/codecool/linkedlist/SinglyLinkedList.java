@@ -169,4 +169,20 @@ public class SinglyLinkedList<T> {
         }
         elementBeforeIndex.setNext(elementAtIndex.getNext());
     }
+
+    public String toString() {
+        StringBuilder linkedListAsString = new StringBuilder();
+        linkedListAsString.append("[");
+        Link nextLink = head;
+        for (int i = 0; i < size; i++) {
+            linkedListAsString.append(nextLink.getValue());
+            if (i!=size-1) {
+                linkedListAsString.append(",");
+            }
+            nextLink = nextLink.getNext();
+        }
+        linkedListAsString.append("]");
+        return linkedListAsString.toString();
+    }
+
 }
