@@ -59,7 +59,11 @@ public class SinglyLinkedList<T> {
      * @return value of element at index
      */
     public T get(int index) {
-        return this.newList[index];
+        if (index<size || index>0) {
+            return this.newList[index];
+        } else {
+            throw new IndexOutOfBoundsException();
+        }
     }
 
     /**
