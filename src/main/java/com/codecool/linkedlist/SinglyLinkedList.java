@@ -1,12 +1,13 @@
 package com.codecool.linkedlist;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
+
+import java.util.Arrays;
+
 
 public class SinglyLinkedList<T> {
 
     private int size;
-    private T t;
+//    private T t;
     private T[] newList;
 
 
@@ -36,6 +37,7 @@ public class SinglyLinkedList<T> {
 
     public SinglyLinkedList() {
         this.size = 0;
+        this.newList = (T[]) new Object[0];
     }
 
 
@@ -46,6 +48,11 @@ public class SinglyLinkedList<T> {
      * @param value value to be appended
      */
     public void add(T value) {
+        if(size ==0) head = new Link(value);
+
+        this.newList = Arrays.copyOf(newList, size+1);
+        this.newList[size]=value;
+        this.size+=1;
     }
 
     /**
@@ -83,7 +90,7 @@ public class SinglyLinkedList<T> {
      * @return Size of list.
      */
     public int size() {
-        return 0;
+        return this.size;
     }
 
     /**
