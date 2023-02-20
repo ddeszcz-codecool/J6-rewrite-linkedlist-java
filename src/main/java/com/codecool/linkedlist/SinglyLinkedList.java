@@ -73,7 +73,16 @@ public class SinglyLinkedList<T> {
      * @return Index of 'number' if it's in the list, otherwise -1;
      */
     public int indexOf(int number) {
-        return 0;
+        int index = 0;
+        for (int i = 0; i < size; i++) {
+            if (newList[i].equals(number)) {
+                index = i;
+                break;
+            } else {
+                index = -1;
+            }
+        }
+        return index;
     }
 
     /**
